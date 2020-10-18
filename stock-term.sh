@@ -10,7 +10,7 @@ COLOR_RED="\e[31m"
 COLOR_RESET="\e[00m"
 
 if [ "${#SYMBOLS[@]}" -eq 0 ]; then
-    echo "Usage: ./stock-term.sh sz000034 sz000592 sh600297 sh603501"
+    echo "Usage: ./stock-term.sh zs000977 "
     exit
 fi
 
@@ -23,11 +23,11 @@ queryStock(){
     echo ${ret_arr[*]}
 }
 
-printf "%-25s|" '股票名称'
-printf "%-10s|" '开盘价'
-printf "%-10s|" '当前价'
-printf "%-13s|" '涨跌幅'
-printf "%-10s\n" '涨跌额'
+# printf "%-25s|" 'n'
+# printf "%-10s|" 's'
+# printf "%-10s|" 'c'
+# printf "%-13s|" '%'
+# printf "%-10s\n" 'diff'
 
 display(){
     for symbol in ${SYMBOLS[@]}; do
@@ -52,11 +52,13 @@ display(){
             color=''
         fi
 
-        printf "%-25s|" $stock_name"["$symbol"]"
+        # printf "%-25s|" $stock_name"["$symbol"]"
+        # printf "%-25s|" ${symbol:5}
         printf "%-7.2f|" $start_price
-        printf "$COLOR_BOLD%-7.2f$COLOR_RESET|" $current_price
-        printf "$color%-10s$COLOR_RESET|" $(printf "%.2f%%" $today_change_rate)
-        printf "$color%-7.2f$COLOR_RESET\n" $today_change
+        # printf "$COLOR_BOLD%-7.2f$COLOR_RESET|" $current_price
+        printf "%-7.2f|" $current_price
+        printf "%-10s|" $(printf "%.2f" $today_change_rate)
+        printf "%-7.2f\n" $today_change
     done;
 }
 
